@@ -60,6 +60,7 @@ export default async function print(
     args.push("-print-settings", printSettings.join(","));
   }
 
+  args.push("-exit-when-done");
   args.push(pdf);
 
   try {

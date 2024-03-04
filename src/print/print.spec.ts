@@ -52,6 +52,7 @@ it("sends the PDF file to the default printer", async () => {
   expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
     "-print-to-default",
     "-silent",
+    "-exit-when-done",
     filename,
   ]);
 });
@@ -67,6 +68,7 @@ it("sends PDF file to the specific printer", async () => {
     "-print-to",
     printer,
     "-silent",
+    "-exit-when-done",
     filename,
   ]);
 });
@@ -82,6 +84,7 @@ it("sends PDF file to the specific printer with a space in its name", async () =
     "-print-to",
     printer,
     "-silent",
+    "-exit-when-done",
     filename,
   ]);
 });
@@ -93,7 +96,14 @@ it("allows users to specify which pages to print in the document", async () => {
 
   expect(execAsync).toHaveBeenCalledWith(
     "mocked_path_SumatraPDF-3.4.6-32.exe",
-    ["-print-to-default", "-silent", "-print-settings", "1,3", filename]
+    [
+      "-print-to-default",
+      "-silent",
+      "-print-settings",
+      "1,3",
+      "-exit-when-done",
+      filename,
+    ]
   );
 });
 
@@ -120,6 +130,7 @@ describe("paper size", () => {
         "-silent",
         "-print-settings",
         `paper=${paperSize}`,
+        "-exit-when-done",
         filename,
       ]);
     });
@@ -139,6 +150,7 @@ describe("orientation", () => {
         "-silent",
         "-print-settings",
         orientation,
+        "-exit-when-done",
         filename,
       ]);
     });
@@ -170,6 +182,7 @@ describe("monochrome", () => {
       "-silent",
       "-print-settings",
       "monochrome",
+      "-exit-when-done",
       filename,
     ]);
   });
@@ -187,6 +200,7 @@ describe("monochrome", () => {
       "-silent",
       "-print-settings",
       "color",
+      "-exit-when-done",
       filename,
     ]);
   });
@@ -207,6 +221,7 @@ describe("subset", () => {
         "-silent",
         "-print-settings",
         "odd",
+        "-exit-when-done",
         filename,
       ]);
     });
@@ -237,6 +252,7 @@ describe("scale", () => {
         "-silent",
         "-print-settings",
         scale,
+        "-exit-when-done",
         filename,
       ]);
     });
@@ -267,6 +283,7 @@ describe("side", () => {
         "-silent",
         "-print-settings",
         side,
+        "-exit-when-done",
         filename,
       ]);
     });
@@ -296,6 +313,7 @@ describe("bin", () => {
       "-silent",
       "-print-settings",
       "bin=1",
+      "-exit-when-done",
       filename,
     ]);
   });
@@ -313,6 +331,7 @@ describe("copies", () => {
       "-silent",
       "-print-settings",
       "3x",
+      "-exit-when-done",
       filename,
     ]);
   });
@@ -326,6 +345,7 @@ it("does not set a printer when printDialog is set to true", async () => {
 
   expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
     "-print-dialog",
+    "-exit-when-done",
     filename,
   ]);
 });
@@ -338,6 +358,7 @@ it("allows to turn on SumatraPDF error messages", async () => {
 
   expect(execAsync).toHaveBeenCalledWith(sumatraPdfPath, [
     "-print-to-default",
+    "-exit-when-done",
     filename,
   ]);
 });
@@ -361,6 +382,7 @@ it("allows to set multiple print settings", async () => {
     "-silent",
     "-print-settings",
     "1-3,5,odd,fit,bin=2,paper=A2",
+    "-exit-when-done",
     filename,
   ]);
 });
@@ -374,6 +396,7 @@ it("works when custom SumatraPDF path specified", async () => {
   expect(execAsync).toHaveBeenCalledWith(anotherSumatraPdfPath, [
     "-print-to-default",
     "-silent",
+    "-exit-when-done",
     filename,
   ]);
 });
